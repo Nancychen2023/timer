@@ -19,10 +19,26 @@
     <style>
         #dify-chatbot-bubble-button {
             background-color: #1C64F2 !important;
+            width: 48px !important;
+            height: 48px !important;
+            border-radius: 50% !important;
+            bottom: 80px !important;
+            right: 20px !important;
+            padding: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
+
+        #dify-chatbot-bubble-button span {
+            display: none !important;
+        }
+
         #dify-chatbot-bubble-window {
             width: 24rem !important;
             height: 40rem !important;
+            bottom: 140px !important;
+            right: 20px !important;
         }
         
         /* 修改powered by文字 */
@@ -45,19 +61,23 @@
         
         /* 移动端适配 */
         @media screen and (max-width: 768px) {
-            #dify-chatbot-bubble-button {
-                width: auto !important;
-                padding: 10px 20px !important;
-                border-radius: 25px !important;
-                bottom: 20px !important;
-                right: 20px !important;
-            }
             #dify-chatbot-bubble-window {
                 width: 90vw !important;
                 height: 80vh !important;
-                bottom: 80px !important;
+                bottom: 140px !important;
                 right: 20px !important;
                 max-width: 400px !important;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            #dify-chatbot-bubble-window {
+                width: 100vw !important;
+                height: 100vh !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
             }
         }
     </style>
@@ -174,30 +194,10 @@
         </a>
     </nav>
 
-    <!-- 聊天机器人 -->
-    <div class="chatbot-wrapper">
-        <button id="chatToggle" class="chat-toggle">
-            <i class="fas fa-headset"></i>
-        </button>
-        <div id="chatContainer" class="chat-container">
-            <iframe
-                src="https://udify.app/chatbot/M2MtWxcZv6rA68wk"
-                style="width: 100%; height: 100%"
-                frameborder="0"
-                allow="microphone">
-            </iframe>
-        </div>
-    </div>
-
     <script>
         // 移动端菜单切换
         document.querySelector('.mobile-nav-toggle').addEventListener('click', function() {
             document.querySelector('.category-menu').classList.toggle('active');
-        });
-
-        // 聊天机器人切换
-        document.getElementById('chatToggle').addEventListener('click', function() {
-            document.getElementById('chatContainer').classList.toggle('active');
         });
     </script>
 </body>
