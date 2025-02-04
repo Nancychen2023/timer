@@ -642,9 +642,18 @@ body {
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .top-bar .container {
+        justify-content: center;
+    }
+    
     .main-header .container {
         flex-direction: column;
         gap: 15px;
+        padding: 10px;
     }
     
     .search-bar {
@@ -652,18 +661,83 @@ body {
         max-width: none;
     }
     
+    .header-btns {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    
+    .header-btns a {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .main-container {
+        flex-direction: column;
+    }
+    
+    .category-menu {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .banner-slider {
+        height: 200px;
+    }
+    
     .banner-cards {
         flex-direction: column;
         height: auto;
+        gap: 10px;
     }
     
-    .service-features .container {
-        flex-wrap: wrap;
+    .service-card {
+        padding: 10px;
+    }
+    
+    .flash-sale .product-scroll {
+        padding: 0 10px;
+        gap: 10px;
+    }
+    
+    .product-card.flash {
+        min-width: 160px;
+    }
+    
+    .brand-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .category-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-banner {
+        display: none;
+    }
+    
+    .category-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
+        padding: 0 10px;
     }
     
-    .feature-item {
-        width: 45%;
+    .footer-bottom .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .chatbot-wrapper {
@@ -708,5 +782,37 @@ body {
     
     .feature-item {
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 20px;
+    }
+    
+    .logo-sub {
+        font-size: 10px;
+    }
+    
+    .category-products {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-card {
+        width: 100%;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-features .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .feature-item {
+        width: 100%;
+        justify-content: center;
     }
 } 
