@@ -138,4 +138,91 @@ startBtn.addEventListener('click', startTimer);
 resetBtn.addEventListener('click', resetTimer);
 
 // 初始化显示
-updateDisplay(); 
+updateDisplay();
+
+// 分类菜单交互
+const categoryItems = document.querySelectorAll('.category-menu li');
+categoryItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        // 这里可以添加显示子菜单的逻辑
+    });
+});
+
+// 轮播图
+let currentSlide = 0;
+const slides = document.querySelectorAll('.banner-slider img');
+const dots = document.querySelectorAll('.banner-dots span');
+
+function showSlide(index) {
+    slides.forEach(slide => slide.style.display = 'none');
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[index].style.display = 'block';
+    dots[index].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+// 自动轮播
+setInterval(nextSlide, 3000);
+
+// 点击切换轮播图
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+    });
+});
+
+// 倒计时功能
+function updateCountdown() {
+    const now = new Date();
+    const end = new Date();
+    end.setHours(23, 59, 59);
+    
+    const diff = end - now;
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.querySelector('.time-box:nth-child(2)').textContent = String(hours).padStart(2, '0');
+    document.querySelector('.time-box:nth-child(4)').textContent = String(minutes).padStart(2, '0');
+    document.querySelector('.time-box:nth-child(6)').textContent = String(seconds).padStart(2, '0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// 搜索框焦点效果
+const searchInput = document.querySelector('.search-bar input');
+searchInput.addEventListener('focus', () => {
+    searchInput.parentElement.style.boxShadow = '0 0 0 2px rgba(225, 37, 27, 0.2)';
+});
+
+searchInput.addEventListener('blur', () => {
+    searchInput.parentElement.style.boxShadow = 'none';
+});
+
+// 返回顶部
+const backToTop = document.createElement('div');
+backToTop.className = 'back-to-top';
+backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+document.body.appendChild(backToTop);
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTop.style.display = 'flex';
+    } else {
+        backToTop.style.display = 'none';
+    }
+});
+
+backToTop.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}); 
