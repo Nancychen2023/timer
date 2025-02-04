@@ -11,6 +11,63 @@ let elapsedTime = 0;
 let timerInterval;
 let isRunning = false;
 
+// 聊天机器人控制
+const chatToggle = document.getElementById('chatToggle');
+const chatContainer = document.getElementById('chatContainer');
+
+chatToggle.addEventListener('click', () => {
+    chatContainer.classList.toggle('hidden');
+});
+
+// 商品卡片悬停效果
+const productCards = document.querySelectorAll('.product-card');
+productCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-10px)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+    });
+});
+
+// 平滑滚动
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// 导航栏滚动效果
+let lastScroll = 0;
+const header = document.querySelector('.header');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        return;
+    }
+    
+    if (currentScroll > lastScroll) {
+        // 向下滚动
+        header.style.transform = 'translateY(-100%)';
+    } else {
+        // 向上滚动
+        header.style.transform = 'translateY(0)';
+        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+    }
+    
+    lastScroll = currentScroll;
+});
+
 // 更新显示时间的函数
 function updateDisplay() {
     const time = new Date(elapsedTime);
