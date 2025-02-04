@@ -1,3 +1,4 @@
+/* 移动优先的基础设置 */
 :root {
     --primary-color: #e1251b;
     --secondary-color: #f10215;
@@ -6,19 +7,21 @@
     --text-color: #333;
     --light-gray: #f5f5f5;
     --white: #ffffff;
-    --max-width: 1190px;
-    --header-height: 140px;
-    --section-spacing: 30px;
+    --header-height: 60px;
+    --section-spacing: 15px;
+    --container-padding: 15px;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
@@ -29,60 +32,37 @@ body {
 }
 
 .container {
-    max-width: var(--max-width);
+    width: 100%;
+    padding: 0 var(--container-padding);
     margin: 0 auto;
-    padding: 0 15px;
 }
 
-/* 顶部导航 */
+/* 移动端导航 */
 .top-bar {
-    background-color: #e3e4e5;
-    border-bottom: 1px solid #ddd;
-    height: 30px;
-    line-height: 30px;
-    font-size: 12px;
+    display: none;
 }
 
-.top-bar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.location {
-    color: #999;
-}
-
-.location i {
-    margin-right: 5px;
-    color: var(--primary-color);
-}
-
-.top-nav {
-    display: flex;
-    gap: 15px;
-}
-
-.top-nav a {
-    color: #999;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.top-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* 主要头部 */
 .main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     background-color: var(--white);
-    padding: 15px 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .main-header .container {
     display: flex;
+    flex-direction: column;
+    padding: 10px var(--container-padding);
+}
+
+.header-top {
+    display: flex;
     align-items: center;
-    gap: 50px;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .logo {
@@ -91,60 +71,60 @@ body {
 }
 
 .logo-text {
-    font-size: 24px;
+    font-size: 1.2rem;
     font-weight: bold;
     color: var(--primary-color);
 }
 
 .logo-sub {
-    font-size: 12px;
-    color: #999;
+    display: none;
+}
+
+.mobile-nav-toggle {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .search-bar {
-    flex: 1;
+    width: 100%;
     display: flex;
-    max-width: 550px;
+    margin: 5px 0;
 }
 
 .search-bar input {
     flex: 1;
-    padding: 12px 15px;
-    border: 2px solid var(--primary-color);
-    border-right: none;
-    font-size: 14px;
-    outline: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.9rem;
 }
 
 .search-bar button {
-    width: 80px;
+    width: 50px;
     background-color: var(--primary-color);
     border: none;
+    border-radius: 0 4px 4px 0;
     color: var(--white);
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.search-bar button:hover {
-    background-color: var(--accent-color);
-}
-
-.header-btns {
-    display: flex;
-    gap: 15px;
-}
-
-/* 主要内容区域 */
-.main-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-/* 分类菜单 */
+/* 移动端菜单 */
 .category-menu {
-    width: 190px;
+    position: fixed;
+    top: var(--header-height);
+    left: -100%;
+    width: 80%;
+    height: calc(100vh - var(--header-height));
     background-color: var(--white);
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.category-menu.active {
+    left: 0;
 }
 
 .category-menu ul {
@@ -152,39 +132,23 @@ body {
 }
 
 .category-menu li {
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
     display: flex;
     align-items: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.category-menu li:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
-}
-
-.category-menu i {
-    margin-right: 8px;
-}
-
-.category-menu li i:last-child {
-    margin-left: auto;
-    font-size: 12px;
-}
-
-/* 主要banner */
-.main-banner {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
+/* 主要内容区域 */
+.main-content {
+    margin-top: calc(var(--header-height) + 10px);
+    padding-bottom: 60px;
+}
+
+/* Banner区域 */
 .banner-slider {
-    position: relative;
-    height: 340px;
+    height: 200px;
+    margin-bottom: 15px;
 }
 
 .banner-slider img {
@@ -193,639 +157,213 @@ body {
     object-fit: cover;
 }
 
-.banner-dots {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-}
-
-.banner-dots span {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-}
-
-.banner-dots span.active {
-    background-color: var(--white);
-}
-
-.banner-cards {
-    display: flex;
-    gap: 10px;
-    height: 130px;
-}
-
-.notice-card {
-    flex: 1;
-    background-color: var(--white);
-    padding: 15px;
-}
-
-.notice-card h3 {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-.notice-content {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.notice-content a {
-    color: #666;
-    text-decoration: none;
-    font-size: 13px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.notice-content a:hover {
-    color: var(--primary-color);
-}
-
+/* 服务卡片 */
 .service-card {
-    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     background-color: var(--white);
     padding: 15px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
-
-.service-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.service-item i {
-    font-size: 24px;
-    color: #666;
-}
-
-.service-item span {
-    font-size: 12px;
-    color: #666;
-}
-
-/* 限时特卖 */
-.flash-sale {
-    margin-top: var(--section-spacing);
-    background-color: var(--white);
-    padding: 20px 0;
-}
-
-.flash-sale .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+    border-radius: 8px;
     margin-bottom: 15px;
 }
 
-.flash-sale h2 {
-    color: var(--primary-color);
-    font-size: 20px;
-}
-
-.flash-sale h2 i {
-    margin-right: 5px;
-}
-
-.countdown {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
-}
-
-.time-box {
-    background-color: #2f3430;
-    color: var(--white);
-    padding: 3px 6px;
-    border-radius: 2px;
-}
-
-.product-scroll {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 0 20px;
-}
-
-.product-card.flash {
-    min-width: 200px;
-    background-color: var(--white);
-    padding: 15px;
-    position: relative;
-    transition: transform 0.3s;
-}
-
-.product-card.flash:hover {
-    transform: translateY(-5px);
-}
-
-.discount-tag {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 2px 8px;
-    font-size: 12px;
-    border-radius: 2px;
-}
-
-.original-price {
-    color: #999;
-    text-decoration: line-through;
-    font-size: 12px;
-}
-
-/* 品牌展示 */
-.featured-brands {
-    margin-top: var(--section-spacing);
-    background-color: var(--white);
-    padding: 20px;
-}
-
-.brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.brand-card {
+.service-item {
     text-align: center;
-    padding: 15px;
-    border: 1px solid #eee;
-    transition: all 0.3s;
 }
 
-.brand-card:hover {
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+.service-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
 }
 
-.brand-card img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+.service-item span {
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 5px;
 }
 
-.brand-card h3 {
-    font-size: 14px;
-    color: #666;
-}
-
-/* 商品展示区 */
-.product-showcase {
-    margin-top: var(--section-spacing);
-}
-
-.showcase-grid {
+/* 商品展示 */
+.product-grid {
     display: grid;
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 0 var(--container-padding);
 }
 
-.showcase-category {
+.product-card {
     background-color: var(--white);
-    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.category-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.category-header h2 {
-    font-size: 20px;
-    color: var(--primary-color);
-}
-
-.more-link {
-    color: #999;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.more-link:hover {
-    color: var(--primary-color);
-}
-
-.category-content {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 20px;
-}
-
-.category-banner img {
+.product-card img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     object-fit: cover;
 }
 
-.category-products {
+.product-info {
+    padding: 10px;
+}
+
+.product-title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-price {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* 底部导航 */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
 }
 
 /* 聊天机器人 */
 .chatbot-wrapper {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
+    bottom: 70px;
+    right: 15px;
+    z-index: 1001;
 }
 
 .chat-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--white);
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 15px 25px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    font-size: 16px;
-    font-weight: 500;
 }
 
 .chat-toggle i {
-    font-size: 24px;
-    animation: pulse 2s infinite;
+    font-size: 1.5rem;
 }
 
-.chat-toggle:hover {
-    transform: scale(1.05);
-    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+.chat-label {
+    display: none;
 }
 
 .chat-container {
     position: fixed;
-    bottom: 100px;
-    right: 20px;
-    width: 400px;
-    height: 700px;
-    background: var(--white);
-    border-radius: 15px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid var(--primary-color);
-}
-
-.chat-container.hidden {
-    transform: translateY(20px);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.chat-container iframe {
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    border: none;
+    background: var(--white);
+    z-index: 1002;
+    display: none;
 }
 
-.chat-label {
-    font-weight: 500;
-    letter-spacing: 0.5px;
+.chat-container.active {
+    display: block;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* 页脚 */
-.service-features {
-    background-color: var(--white);
-    padding: 30px 0;
-    margin-top: 50px;
-}
-
-.service-features .container {
-    display: flex;
-    justify-content: space-around;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.feature-item i {
-    font-size: 24px;
-    color: var(--primary-color);
-}
-
-.footer-content {
-    background-color: #eaeaea;
-    padding: 40px 0;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) 200px;
-    gap: 40px;
-}
-
-.footer-section h4 {
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 8px;
-}
-
-.footer-section a {
-    color: #666;
-    text-decoration: none;
-    font-size: 12px;
-}
-
-.footer-section a:hover {
-    color: var(--primary-color);
-}
-
-.qrcode {
-    text-align: center;
-}
-
-.qrcode img {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 8px;
-}
-
-.qrcode p {
-    font-size: 12px;
-    color: #999;
-}
-
-.footer-bottom {
-    background-color: #eaeaea;
-    padding: 20px 0;
-    border-top: 1px solid #ddd;
-}
-
-.footer-bottom .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: #666;
-}
-
-.footer-links {
-    display: flex;
-    gap: 15px;
-}
-
-.footer-links a {
-    color: #666;
-    text-decoration: none;
-}
-
-.footer-links a:hover {
-    color: var(--primary-color);
-}
-
-/* 响应式设计 */
-@media (max-width: 1200px) {
-    :root {
-        --max-width: 960px;
-    }
-}
-
-@media (max-width: 992px) {
-    .category-menu {
-        display: none;
-    }
-    
-    .main-banner {
-        width: 100%;
-    }
-    
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
+/* 平板端样式 */
+@media (min-width: 768px) {
     .container {
-        padding: 0 10px;
-    }
-    
-    .top-bar .container {
-        justify-content: center;
+        max-width: 720px;
     }
     
     .main-header .container {
-        flex-direction: column;
-        gap: 15px;
-        padding: 10px;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
     }
     
     .search-bar {
-        width: 100%;
-        max-width: none;
-    }
-    
-    .header-btns {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-    }
-    
-    .header-btns a {
-        flex: 1;
-        text-align: center;
-    }
-    
-    .main-container {
-        flex-direction: column;
-    }
-    
-    .category-menu {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    
-    .banner-slider {
-        height: 200px;
-    }
-    
-    .banner-cards {
-        flex-direction: column;
-        height: auto;
-        gap: 10px;
-    }
-    
-    .service-card {
-        padding: 10px;
-    }
-    
-    .flash-sale .product-scroll {
-        padding: 0 10px;
-        gap: 10px;
-    }
-    
-    .product-card.flash {
-        min-width: 160px;
-    }
-    
-    .brand-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-    
-    .category-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .category-banner {
-        display: none;
-    }
-    
-    .category-products {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 0 10px;
-    }
-    
-    .footer-bottom .container {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        text-align: center;
-    }
-    
-    .footer-links {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .chatbot-wrapper {
-        bottom: 20px;
-        right: 20px;
-    }
-    
-    .chat-toggle {
-        padding: 12px 20px;
-    }
-    
-    .chat-container {
-        width: calc(100vw - 40px);
-        height: 80vh;
         max-width: 400px;
-        bottom: 80px;
+        margin: 0;
     }
     
-    .chat-label {
-        display: none;
-    }
-}
-
-@media (max-width: 576px) {
-    .top-nav {
-        display: none;
-    }
-    
-    .header-btns {
-        flex-direction: column;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .feature-item {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .logo-text {
-        font-size: 20px;
-    }
-    
-    .logo-sub {
-        font-size: 10px;
-    }
-    
-    .category-products {
-        grid-template-columns: 1fr;
-    }
-    
-    .product-card {
-        width: 100%;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .service-features .container {
-        flex-direction: column;
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
         gap: 15px;
     }
     
-    .feature-item {
-        width: 100%;
-        justify-content: center;
-    }
-    
     .chat-container {
-        width: 100vw;
-        height: 100vh;
-        right: 0;
-        bottom: 0;
-        border-radius: 0;
-        border: none;
+        top: auto;
+        left: auto;
+        right: 20px;
+        bottom: 100px;
+        width: 350px;
+        height: 500px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+}
+
+/* 桌面端样式 */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 960px;
     }
     
-    .chat-toggle {
-        width: 50px;
-        height: 50px;
-        padding: 0;
-        justify-content: center;
+    .top-bar {
+        display: block;
     }
     
-    .chat-toggle i {
-        margin: 0;
+    .mobile-nav-toggle {
+        display: none;
+    }
+    
+    .category-menu {
+        position: static;
+        width: 200px;
+        height: auto;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+    
+    .mobile-bottom-nav {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
     }
 } 
