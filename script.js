@@ -19,6 +19,16 @@ chatToggle.addEventListener('click', () => {
     chatContainer.classList.toggle('hidden');
 });
 
+// 商品分类标签切换
+const tabs = document.querySelectorAll('.tab');
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        // 这里可以添加商品筛选逻辑
+    });
+});
+
 // 商品卡片悬停效果
 const productCards = document.querySelectorAll('.product-card');
 productCards.forEach(card => {
@@ -52,7 +62,7 @@ window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
     if (currentScroll <= 0) {
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         return;
     }
     
@@ -62,10 +72,27 @@ window.addEventListener('scroll', () => {
     } else {
         // 向上滚动
         header.style.transform = 'translateY(0)';
-        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
     }
     
     lastScroll = currentScroll;
+});
+
+// 订阅表单处理
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = newsletterForm.querySelector('input[type="email"]').value;
+        // 这里可以添加订阅逻辑
+        alert('感谢订阅！我们会将最新资讯发送到您的邮箱：' + email);
+        newsletterForm.reset();
+    });
+}
+
+// 添加页面加载动画
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
 });
 
 // 更新显示时间的函数
