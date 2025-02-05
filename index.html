@@ -194,18 +194,26 @@
 
     <!-- 聊天机器人 -->
     <div class="chatbot-wrapper">
-        <button class="chat-toggle" onclick="toggleChat()">
-            <i class="fas fa-headset"></i>
-        </button>
-        <div class="chat-container" id="chatContainer">
-            <iframe
-                src="https://0129-101-228-113-52.ngrok-free.app/apps"
-                style="width: 100%; height: 100%"
-                frameborder="0"
-                allow="microphone; camera"
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms">
-            </iframe>
-        </div>
+        <script>
+            window.difyChatbotConfig = {
+                token: 'SLhH1RdBIZ4UamLN',
+                baseUrl: 'http://47.113.201.35'
+            }
+        </script>
+        <script
+            src="http://47.113.201.35/embed.min.js"
+            id="SLhH1RdBIZ4UamLN"
+            defer>
+        </script>
+        <style>
+            #dify-chatbot-bubble-button {
+                background-color: #1C64F2 !important;
+            }
+            #dify-chatbot-bubble-window {
+                width: 24rem !important;
+                height: 40rem !important;
+            }
+        </style>
     </div>
 
     <script>
@@ -213,11 +221,6 @@
         document.querySelector('.mobile-nav-toggle').addEventListener('click', function() {
             document.querySelector('.category-menu').classList.toggle('active');
         });
-
-        // 聊天机器人切换
-        function toggleChat() {
-            document.getElementById('chatContainer').classList.toggle('active');
-        }
     </script>
 </body>
 </html> 

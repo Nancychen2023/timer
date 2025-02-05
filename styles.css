@@ -319,17 +319,6 @@ body {
         grid-template-columns: repeat(3, 1fr);
         gap: 15px;
     }
-    
-    .chat-container {
-        top: auto;
-        left: auto;
-        right: 20px;
-        bottom: 100px;
-        width: 350px;
-        height: 500px;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
 }
 
 /* 桌面端样式 */
