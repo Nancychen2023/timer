@@ -124,13 +124,15 @@
         <script>
             window.difyChatbotConfig = {
                 token: 'SLhH1RdBIZ4UamLN',
-                baseUrl: 'http://47.113.201.35'
-            }
-        </script>
-        <script
-            src="http://47.113.201.35/embed.min.js"
-            id="SLhH1RdBIZ4UamLN"
-            defer>
+                baseUrl: window.location.protocol + '//47.113.201.35'
+            };
+            
+            // 动态加载脚本
+            var script = document.createElement('script');
+            script.src = window.location.protocol + '//47.113.201.35/embed.min.js';
+            script.id = 'SLhH1RdBIZ4UamLN';
+            script.defer = true;
+            document.body.appendChild(script);
         </script>
         <style>
             #dify-chatbot-bubble-button {
