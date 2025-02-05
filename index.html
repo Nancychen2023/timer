@@ -199,13 +199,15 @@
             <i class="fas fa-headset"></i>
         </button>
         <div class="chat-container" id="chatContainer">
-            <iframe
-                src="http://47.113.201.35:3000"
-                style="width: 100%; height: 100%"
-                frameborder="0"
-                allow="microphone; camera; fullscreen; geolocation"
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox allow-downloads allow-modals">
-            </iframe>
+            <div id="botcopy-embedder-d7lcfheammjct"></div>
+            <script>
+                (function(d, w) {
+                    var script = d.createElement('script');
+                    script.src = 'http://47.113.201.35:3000/botcopy.js';
+                    script.defer = true;
+                    document.body.appendChild(script);
+                })(document, window);
+            </script>
         </div>
     </div>
 
